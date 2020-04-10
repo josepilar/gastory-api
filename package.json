@@ -13,8 +13,8 @@
     "node-env-run": "^3.0.2"
   },
   "scripts": {
-    "start": "node server",
-    "serverdev": "node-env-run server --exec nodemon"
+    "start": "node server.js",
+    "serverdev": "node-env-run server.js --exec nodemon"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
