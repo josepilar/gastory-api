@@ -19,8 +19,8 @@ db.on('error', console.log.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Connected to db.');
 
-    app.listen(process.evn.PORT || 3001, () =>
-        console.log(`Express server is running on localhost:${process.evn.PORT || 3001}`)
+    app.listen(process.env.PORT || 3001, () =>
+        console.log(`Express server is running on localhost:${process.env.PORT || 3001}`)
     );
 });
 
