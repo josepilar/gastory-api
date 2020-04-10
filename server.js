@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -6,7 +7,9 @@ const api = require('./api');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors({
+    origin: 'https://gastory.herokuapp.com'
+}));
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT } = process.env;
 const conectionString = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 // Connect to Mongoose and set connection variable
