@@ -14,6 +14,10 @@ mongoose.connect(conectionString, { useNewUrlParser: true, useUnifiedTopology: t
 var db = mongoose.connection;
 app.use('/api', api);
 
+app.use('', function (req, res) {
+    return res.status(200).json({ status: 200, message: 'Working fine!' });
+})
+
 db.on('error', console.log.bind(console, 'connection error:'));
 
 db.once('open', function () {
