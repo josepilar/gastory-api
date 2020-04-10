@@ -8,7 +8,7 @@ const api = require('./api');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
-    origin: 'https://gastory.herokuapp.com'
+    origin: process.env.UI_URL || 'http://localhost:3000'
 }));
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT } = process.env;
 const conectionString = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
