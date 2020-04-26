@@ -65,6 +65,7 @@ module.exports = function (router) {
       user: {
         displayName: newUser.displayName,
         username: newUser.username,
+        email: newUser.email,
         id: newUser.id,
         profilePicture: newUser.profilePicture
       },
@@ -79,6 +80,7 @@ module.exports = function (router) {
       user: {
         displayName: req.user.displayName,
         username: req.user.username,
+        email: req.user.email,
         id: req.user.id,
         profilePicture: req.user.profilePicture
       },
