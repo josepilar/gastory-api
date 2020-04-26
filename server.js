@@ -2,24 +2,29 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const cookieParser = require("cookie-parser");
 
 const api = require('./api');
 
 const app = express();
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
     origin: process.env.UI_URL || 'http://localhost:3000'
 }));
+
+// DATA BASE CONNECTION
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT } = process.env;
 const conectionString = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 // Connect to Mongoose and set connection variable
-mongoose.connect(conectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(conectionString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 var db = mongoose.connection;
-app.use('/api', api);
 
-app.use('', function (req, res) {
-    return res.status(200).json({ status: 200, message: 'Working fine!' });
-})
+
+app.use('/api', api);
 
 db.on('error', console.log.bind(console, 'connection error:'));
 
