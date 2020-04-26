@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
-    origin: process.env.UI_URL || 'http://localhost:3000'
+    origin: process.env.UI_URL
 }));
 
 // DATA BASE CONNECTION

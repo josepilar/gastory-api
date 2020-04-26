@@ -3,7 +3,7 @@ const JWT = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const { validateBody, schemas } = require('../helpers/routeHelper');
-const sendEmail = require('../helpers/emailHelper');
+const { sendResetEmail, sendConfirmChangeEmail } = require('../helpers/emailHelper');
 const User = require('../../models/user');
 
 const localAuth = passport.authenticate('local', { session: false });
@@ -91,7 +91,7 @@ module.exports = function (router) {
     const foundUser = await User.findOne({ email });
     if (foundUser) {
       const token = signToken(email, foundUser.password);
-      sendEmail(email, token);
+      sendResetEmail(email, token);
     }
 
     return res.status(200).json();
@@ -102,6 +102,7 @@ module.exports = function (router) {
     const foundUser = await User.findById(id);
     foundUser.password = await hashPassword(req.value.body.password);
     await foundUser.save();
+    sendConfirmChangeEmail(foundUser.email);
     res.status(200).json({ success: true, message: "Password successfully changed." });
   });
 
