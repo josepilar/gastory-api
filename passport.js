@@ -4,7 +4,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 
 const User = require('./models/user');
-
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: process.env.JWT_SECRET
@@ -34,7 +33,6 @@ passport.use(new LocalStrategy({
     }
 
     const match = await user.isValidPassword(password);
-
     if (!match) {
       return done(null, false);
     }

@@ -46,7 +46,7 @@ async function hashPassword(password) {
   return;
 }
 
-module.exports = function (router) {
+module.exports = async function (router) {
   router.route('/signup').post(validateBody(schemas.authSchema), async function (req, res) {
     const { email, password, username, profilePicture, displayName } = req.value.body;
 
@@ -54,8 +54,8 @@ module.exports = function (router) {
     if (foundUser) {
       return res.status(403).json({ success: false, message: 'this username is already in use' })
     }
-
-    const newUser = new User({ email, password: hashPassword(password), username, profilePicture, displayName });
+    console.log(password);
+    const newUser = new User({ email, password: await hashPassword(`${password}`), username, profilePicture, displayName });
     await newUser.save();
     const token = signToken(newUser.id);
 
