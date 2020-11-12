@@ -42,6 +42,12 @@ module.exports = {
     }),
     verifyToken: Joi.object().keys({
       token: Joi.string().required()
-    })
+    }),
+    tripSchema: Joi.object().keys({
+      trip: Joi.number().required(),
+      cost: Joi.number().required(),
+      volume: Joi.number().required(),
+      carId: Joi.string().required(),
+    }),
   }
 }

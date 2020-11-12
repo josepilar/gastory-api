@@ -52,6 +52,7 @@ module.exports = async function (router) {
 
     const foundUser = await User.findOne({ username });
     if (foundUser) {
+      if (foundUser.email === email) return res.status(403).json({ success: false, message: 'this email is already in use' })
       return res.status(403).json({ success: false, message: 'this username is already in use' })
     }
     console.log(password);
