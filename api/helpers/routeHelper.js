@@ -3,9 +3,9 @@ const Joi = require('joi');
 module.exports = {
   validateBody: (schema) => {
     return (req, res, next) => {
-      const result = Joi.validate(req.body, schema);
+      const result = Joi.validate(req.body, schema, { abortEarly: false, allowUnknown: true });
       if (result.error) {
-        return res.status(400).json(result.error);
+        return res.status(400).json({ errors: result.error.details });
       }
       if (!req.value) {
         req.value = {};
@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   schemas: {
-    authSchema: Joi.object().keys({
+    authSchema: Joi.object({
       username: Joi.string().required(),
       password: Joi.string().required(),
       confirm: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } }),
@@ -23,31 +23,40 @@ module.exports = {
       displayName: Joi.string(),
       profilePicture: Joi.string(),
     }),
-    signinSchema: Joi.object().keys({
+    signinSchema: Joi.object({
       username: Joi.string().required(),
       password: Joi.string().required()
     }),
-    resetPassword: Joi.object().keys({
+    resetPassword: Joi.object({
       email: Joi.string().required()
     }),
-    changePassword: Joi.object().keys({
+    changePassword: Joi.object({
       password: Joi.string().required(),
       confirm: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } }),
       token: Joi.string().required()
     }),
-    changePasswordUser: Joi.object().keys({
+    changePasswordUser: Joi.object({
       password: Joi.string().required(),
       newPassword: Joi.string().required(),
       confirm: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } }),
     }),
-    verifyToken: Joi.object().keys({
+    verifyToken: Joi.object({
       token: Joi.string().required()
     }),
-    tripSchema: Joi.object().keys({
+    tripSchema: Joi.object({
       trip: Joi.number().required(),
       cost: Joi.number().required(),
       volume: Joi.number().required(),
       carId: Joi.string().required(),
+    }),
+    carSchema: Joi.object({
+      maker: Joi.string().required(),
+      model: Joi.string().required(),
+      year: Joi.number().required(),
+      color: Joi.string().required(),
+      plates: Joi.string().required(),
+      imageUrl: Joi.string().allow(''),
+      default: Joi.boolean()
     }),
   }
 }

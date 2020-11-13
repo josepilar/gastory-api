@@ -25,7 +25,6 @@ module.exports = function (router) {
             if (car.userId !== req.user.id) return res.status(403).json({message: 'Not authorized.'});
             const newTrip = new Trip({ ...req.value.body, userId: req.user.id });
             const trip = await newTrip.save();
-            console.log(trip);
             return res.status(200).json(trip);
         } catch (error) {
             res.status(400).json({message: 'Bad request.', error});
