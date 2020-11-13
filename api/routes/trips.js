@@ -2,7 +2,7 @@ const passport = require('passport');
 
 const Trip = require('../../models/trip');
 const Car = require('../../models/car');
-const { validateBody, schemas } = require('../helpers/routeHelper');
+const { validateBody, schemas } = require('../helpers/joiHelper');
 
 const jtwAuth = passport.authenticate('jwt', { session: false });
 

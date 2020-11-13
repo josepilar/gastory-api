@@ -5,7 +5,7 @@ const Trip = require('../../models/trip');
 
 const jtwAuth = passport.authenticate('jwt', { session: false });
 
-const { validateBody, schemas } = require('../helpers/routeHelper');
+const { validateBody, schemas } = require('../helpers/joiHelper');
 
 module.exports = function (router) {
     // GET: cars for the logged in user.

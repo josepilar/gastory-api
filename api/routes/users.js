@@ -2,7 +2,7 @@ const passport = require('passport');
 const JWT = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const { validateBody, schemas } = require('../helpers/routeHelper');
+const { validateBody, schemas } = require('../helpers/joiHelper');
 const { sendResetEmail, sendConfirmChangeEmail } = require('../helpers/emailHelper');
 const User = require('../../models/user');
 
