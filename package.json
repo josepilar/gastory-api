@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "serverdev": "node-env-run server.js --exec nodemon"
+    "dev": "node-env-run server.js --exec nodemon"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
