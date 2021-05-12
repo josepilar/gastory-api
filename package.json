@@ -18,7 +18,7 @@
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
     "node-env-run": "^4.0.2",
-    "nodemailer": "^6.4.15",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
